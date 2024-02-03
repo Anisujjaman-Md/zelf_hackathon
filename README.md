@@ -1,4 +1,4 @@
-# QSL Problem_1
+# Zelf Hackathon
 
 ## Table of Contents
 
@@ -19,8 +19,8 @@
 1. Clone the repository:
 
     ```bash
-    git clone 
-    cd 
+    git clone https://github.com/Anisujjaman-Md/zelf_hackathon.git
+    cd zelf_hackathon
     ```
 
 2. Create a virtual environment:
