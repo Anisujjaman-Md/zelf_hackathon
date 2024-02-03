@@ -34,10 +34,13 @@ class ContentListView(ViewSet):
 
 class AggregatedStatsView(ViewSet):
     def list(self, request, *args, **kwargs):
-        url = 'http://127.0.0.1:8000/api/zelf/content-list/?page=1'
-        payload = {}
-        headers = {}
-        response = requests.request("GET", url, headers=headers, data=payload)
+        try:
+            url = 'http://127.0.0.1:8000/api/zelf/content-list/?page=1'
+            payload = {}
+            headers = {}
+            response = requests.request("GET", url, headers=headers, data=payload)
+        except httpx.RequestError as e:
+            return Response(data={"error": str(e)}, status=status.HTTP_404_NOT_FOUND)
         raw_data = json.loads(response.text)[0]
 
         total_likes = sum(entry['stats']['digg_counts']['likes']['count'] for entry in raw_data)
@@ -57,4 +60,4 @@ class AggregatedStatsView(ViewSet):
             "average_views": average_views,
             "average_comments": average_comments,
         }
-        return Response(aggregated_stats)
+        return Response(aggregated_stats, status=status.HTTP_200_OK)

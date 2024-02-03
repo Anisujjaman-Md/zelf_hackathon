@@ -37,9 +37,3 @@ class ContentListSerializer(serializers.Serializer):
 
         # Return the modified initial_data
         return self.initial_data
-
-
-class DataEntrySerializer(serializers.Serializer):
-    unique_id = serializers.IntegerField()
-    author = serializers.ListField()
-    stats = serializers.DictField()
